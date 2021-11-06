@@ -57,7 +57,7 @@ def compute(matrix):
 
     return (avgPrecision,avgRecall,f1Score,accuracy,jaccard,specificity)
 
-data = pd.read_excel("/mnt/z/program/files/confusion matrix-- face-yale.xlsx")
+data = pd.read_excel("/mnt/z/Program/GitHub/compute-Confusion-Matrix/confusion matrix-- face-new.xlsx")
 dataList = data.values.tolist()
 for i in range(len(dataList)):
     dataList[i] = dataList[i][1:]

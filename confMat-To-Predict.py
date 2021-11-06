@@ -3,8 +3,37 @@ from sklearn.metrics import accuracy_score
 from sklearn.metrics import f1_score
 from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
+import pandas as pd
+
+df = pd.read_excel("/mnt/z/Program/GitHub/compute-Confusion-Matrix/confusion matrix-- face-new.xlsx")
+data = df.values.tolist()
+
+#print(data)
+y_true = data[0][0]
+y_pred = data[1][0]
+yt = []
+yt[:0] = y_true
+
+yp = []
+yp[:0] = y_pred
+
+print("Accuray      :", accuracy_score(yt, yp) )
+#print("Precision    :", precision_score(yt, yp, average='macro'))
+print("F1 score     :", f1_score(yt, yp,average='macro'))
+#print("recall ", recall_score(yt, yp,average='macro') )
+
+
+
+
+from sklearn.metrics import jaccard_score
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import f1_score
+from sklearn.metrics import precision_score
+from sklearn.metrics import recall_score
+
 from sklearn.metrics import confusion_matrix
 import numpy as np
+
 
 import pandas as pd
 
@@ -54,7 +83,7 @@ def counts_from_confusion(confusion):
     for i in range(confusion.shape[0]):
         tp = confusion[i, i]
 
-        fn_mask = np.zeros(confusion.shape)
+        fn_mask = np.zeros(confusion.shape) 
         fn_mask[i, :] = 1
         fn_mask[i, i] = 0
         fn = np.sum(np.multiply(confusion, fn_mask))
@@ -77,6 +106,14 @@ def counts_from_confusion(confusion):
     return counts_list
 
 
+
+
+
+
+
+
+"""
+
 data = pd.read_excel("/mnt/z/program/files/confusion matrix-- face-yale.xlsx")
 dataList = data.values.tolist()
 for i in range(len(dataList)):
@@ -98,4 +135,41 @@ print("Jaccard Sore        : ",jaccard_score(yTrue,yPred,average='macro'))
 print("Average Specificity : ",speci(dataList))
 
 
+"""
+"""
+ytrue 1 2 3 2 1 2 3 2 1 2 3 2 1 2 3
+ypred 1 2 1 2 3 2 1 2 3 3 2 1 2 3 1
 
+    1   2   3
+1   1   1   2   tp              tn
+2   1   4   2       tn                tp
+3   3   1   0           tn                  tn
+
+
+1/(1+(1+2))
+
+
+4+1 % 15
+
+
+
+
+36 X 36
+
+
+
+cat - cat => ture postive
+
+not cat - dog  => ture negetive
+
+cat - dog => false postive
+
+dog - cat => false negetive
+=================
+
+dog - dog true p
+
+not dog - cat => true neg
+
+
+"""
