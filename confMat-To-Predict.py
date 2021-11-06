@@ -3,41 +3,13 @@ from sklearn.metrics import accuracy_score
 from sklearn.metrics import f1_score
 from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
-import pandas as pd
-
-df = pd.read_excel("/mnt/z/Program/GitHub/compute-Confusion-Matrix/confusion matrix-- face-new.xlsx")
-data = df.values.tolist()
-
-#print(data)
-y_true = data[0][0]
-y_pred = data[1][0]
-yt = []
-yt[:0] = y_true
-
-yp = []
-yp[:0] = y_pred
-
-print("Accuray      :", accuracy_score(yt, yp) )
-#print("Precision    :", precision_score(yt, yp, average='macro'))
-print("F1 score     :", f1_score(yt, yp,average='macro'))
-#print("recall ", recall_score(yt, yp,average='macro') )
-
-
-
-
-from sklearn.metrics import jaccard_score
-from sklearn.metrics import accuracy_score
-from sklearn.metrics import f1_score
-from sklearn.metrics import precision_score
-from sklearn.metrics import recall_score
-
 from sklearn.metrics import confusion_matrix
+
 import numpy as np
-
-
 import pandas as pd
 
-def matToVals(matrix):
+def matrixToValues(matrix):
+    # Obtain yPred and yActual from confusion matrix
     n = len(matrix)
     yActual = []
     yPred = []
@@ -50,7 +22,8 @@ def matToVals(matrix):
             yPred += matrix[i][j]*[j]
     return (yActual,yPred)
 
-def speci(matrix):
+def calcSpeci(matrix):
+    # Calculate Specificity given confusion matrix
     n = len(matrix)
     rowSum=n*[0]
     colSum=n*[0]
@@ -108,68 +81,17 @@ def counts_from_confusion(confusion):
 
 
 
+if __name__ == "__main__":
+
+    data = pd.read_excel("confusion matrix-- face-new.xlsx")
+    dataList = data.values.tolist()
+    for i in range(len(dataList)):
+        dataList[i] = dataList[i][1:]
+    yTrue , yPred = matrixToValues(dataList)
 
 
-
-
-"""
-
-data = pd.read_excel("/mnt/z/program/files/confusion matrix-- face-yale.xlsx")
-dataList = data.values.tolist()
-for i in range(len(dataList)):
-    dataList[i] = dataList[i][1:]
-
-#dataList = [ [50,3,0,0],[26,8,0,1],[20,2,4,0],[12,0,0,1] ]
-yTrue , yPred = matToVals(dataList)
-
-lis = counts_from_confusion(confusion_matrix(yTrue,yPred))
-
-
-
-
-print("Average Precision  : ", precision_score(yTrue,yPred,average='macro') )
-print("Average Recall      : ",recall_score(yTrue,yPred,average='macro'))
-print("F1 Score - macro    : ",f1_score(yTrue,yPred,average='macro'))
-print("Accuracy            : ",accuracy_score(yTrue,yPred))
-print("Jaccard Sore        : ",jaccard_score(yTrue,yPred,average='macro'))
-print("Average Specificity : ",speci(dataList))
-
-
-"""
-"""
-ytrue 1 2 3 2 1 2 3 2 1 2 3 2 1 2 3
-ypred 1 2 1 2 3 2 1 2 3 3 2 1 2 3 1
-
-    1   2   3
-1   1   1   2   tp              tn
-2   1   4   2       tn                tp
-3   3   1   0           tn                  tn
-
-
-1/(1+(1+2))
-
-
-4+1 % 15
-
-
-
-
-36 X 36
-
-
-
-cat - cat => ture postive
-
-not cat - dog  => ture negetive
-
-cat - dog => false postive
-
-dog - cat => false negetive
-=================
-
-dog - dog true p
-
-not dog - cat => true neg
-
-
-"""
+    print("Average Precision   : ", precision_score(yTrue,yPred,average='macro') )
+    print("Average Recall      : ",recall_score(yTrue,yPred,average='macro'))
+    print("F1 Score - macro    : ",f1_score(yTrue,yPred,average='macro'))
+    print("Accuracy            : ",accuracy_score(yTrue,yPred))
+    print("Jaccard Sore        : ",jaccard_score(yTrue,yPred,average='macro'))

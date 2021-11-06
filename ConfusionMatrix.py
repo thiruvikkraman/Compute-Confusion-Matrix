@@ -1,3 +1,9 @@
+"""
+Please note : The below code is an implementation done from scratch (without the use of sklearn)
+
+"""
+
+
 import pandas as pd
 
 def compute(matrix):
@@ -61,8 +67,6 @@ data = pd.read_excel("/mnt/z/Program/GitHub/compute-Confusion-Matrix/confusion m
 dataList = data.values.tolist()
 for i in range(len(dataList)):
     dataList[i] = dataList[i][1:]
-
-#dataList = [ [50,3,0,0],[26,8,0,1],[20,2,4,0],[12,0,0,1] ]
 
 avgPrecision,avgRecall,f1Score,accuracy,jaccard,specificity = compute(dataList)
 
