@@ -96,7 +96,7 @@ if __name__ == "__main__":
     if ( args.file ):
         file = args.file
     else:
-        print("\nThis is a sample Confusion matrix. Replace \"confusion matrix-- face-new.xlsx\" ")
+        print("\nThis is a sample Confusion matrix. Save your Confusion matrix in the same directory as \"confMat-To_predict.py\" \n ")
 
     data = pd.read_excel(file)
     dataList = data.values.tolist()
