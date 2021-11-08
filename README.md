@@ -6,7 +6,8 @@ Run the following command in the terminal <br />
 $ pip install sklearn <br />
 $ pip install openpyxl <br />
 
-Replace the "confusion matrix-- face-new.xlsx" <br />
+Save your Confusion matrix in the same directory as "confMat-To_predict.py"  <br />
+(Check "confusion matrix-- face-new.xlsx" for reference )
 To run the program <br />
 $ python3 confMat-To-Predict.py -f  filename.xlsx <br />
 
