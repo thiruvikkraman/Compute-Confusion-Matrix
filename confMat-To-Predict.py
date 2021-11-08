@@ -8,6 +8,8 @@ from sklearn.metrics import confusion_matrix
 import numpy as np
 import pandas as pd
 
+import argparse
+
 def matrixToValues(matrix):
     # Obtain yPred and yActual from confusion matrix
     n = len(matrix)
@@ -83,7 +85,20 @@ def counts_from_confusion(confusion):
 
 if __name__ == "__main__":
 
-    data = pd.read_excel("confusion matrix-- face-new.xlsx")
+    
+    file = "confusion matrix-- face-new.xlsx"
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-f", "--file", help = "Location of file containing the confusion matrix")
+
+    args = parser.parse_args()
+
+    if ( args.file ):
+        file = args.file
+    else:
+        print("\nThis is a sample Confusion matrix. Replace \"confusion matrix-- face-new.xlsx\" ")
+
+    data = pd.read_excel(file)
     dataList = data.values.tolist()
     for i in range(len(dataList)):
         dataList[i] = dataList[i][1:]
